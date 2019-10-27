@@ -1,0 +1,25 @@
+{
+  "private": true,
+  "name": "@wildpeaks/example",
+  "version": "0.0.1",
+  "description": "Example package",
+  "eslintConfig": {
+    "extends": "@wildpeaks/commonjs"
+  },
+  "scripts": {
+    "fake_lint": "node src/fake_lint.js",
+    "lint": "eslint src/**/*.js"
+  },
+  "author": "Cecile Muller",
+  "license": "MIT",
+  "devDependencies": {
+    "@wildpeaks/eslint-config-commonjs": "7.1.0",
+    "eslint": "6.6.0",
+    "husky": "3.0.9"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  }
+}
