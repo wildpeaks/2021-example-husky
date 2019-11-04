@@ -1,0 +1,19 @@
+name: Manual Action
+on:
+  repository_dispatch:
+    types:
+      - mytype
+
+jobs:
+  build:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download sources
+        uses: actions/checkout@v1
+
+      - name: Dummy command
+        run: |
+          echo MASTER BRANCH
+
