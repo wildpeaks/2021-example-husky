@@ -15,5 +15,5 @@ jobs:
 
       - name: Dummy command
         run: |
-          echo MASTER BRANCH
+          echo "Value is ${{ github.event.client_payload.hello }}"
 
