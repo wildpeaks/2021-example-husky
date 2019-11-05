@@ -3,39 +3,27 @@ on:
   push:
     branches:
       - '**'
-
 jobs:
   notify:
     timeout-minutes: 5
     runs-on: ubuntu-latest
+    env:
+      EXAMPLE_SUCCESS: "DEFAULT VALUE"
+      EXAMPLE_FAILURE: "DEFAULT VALUE"
     steps:
-
       - name: This should pass
         run: |
-          echo "Without error code"
-
+          echo ::set-env name=EXAMPLE_SUCCESS::MODIFIED
       - name: This should fail
         run: |
-          echo "With error code"
+          echo ::set-env name=EXAMPLE_FAILURE::MODIFIED
           exit 1
-
-      - name: Success step
-        if: success()
-        run: echo "OK success"
-
-      - name: Failure step
-        if: failure()
-        run: echo "OK failure"
-
-      - name: No conditional
-        run: echo "OK skippable"
-
-      - name: Success or failure
+      - name: This should be skipped
+        run: |
+          echo "EXAMPLE_SUCCESS is $EXAMPLE_SUCCESS"
+          echo "EXAMPLE_FAILURE is $EXAMPLE_FAILURE"
+      - name: This shouldn't be skipped
         if: success() || failure()
-        run: echo "OK non-skippable 1"
-
-      - name: Failure or success
-        if: success() || failure()
-        run: echo "OK non-skippable 2"
-
-
+        run: |
+          echo "EXAMPLE_SUCCESS is $EXAMPLE_SUCCESS"
+          echo "EXAMPLE_FAILURE is $EXAMPLE_FAILURE"
