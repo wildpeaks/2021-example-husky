@@ -1,0 +1,41 @@
+name: Notifications
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  notify:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: This should pass
+        run: |
+          echo "Without error code"
+
+      - name: This should fail
+        run: |
+          echo "With error code"
+          exit 1
+
+      - name: Success step
+        if: success()
+        run: echo "OK success"
+
+      - name: Failure step
+        if: failure()
+        run: echo "OK failure"
+
+      - name: No conditional
+        run: echo "OK skippable"
+
+      - name: Success or failure
+        if: success() || failure()
+        run: echo "OK non-skippable 1"
+
+      - name: Failure or success
+        if: success() || failure()
+        run: echo "OK non-skippable 2"
+
+
