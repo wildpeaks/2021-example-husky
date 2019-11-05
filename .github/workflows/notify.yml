@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - '**'
+
 jobs:
   notify:
     timeout-minutes: 5
@@ -10,19 +11,23 @@ jobs:
     env:
       EXAMPLE_SUCCESS: "DEFAULT VALUE"
       EXAMPLE_FAILURE: "DEFAULT VALUE"
+
     steps:
       - name: This should pass
         run: |
           echo ::set-env name=EXAMPLE_SUCCESS::MODIFIED
+
       - name: This should fail
         run: |
           echo ::set-env name=EXAMPLE_FAILURE::MODIFIED
           exit 1
+
       - name: This should be skipped
         run: |
           echo "EXAMPLE_SUCCESS is $EXAMPLE_SUCCESS"
           echo "EXAMPLE_FAILURE is $EXAMPLE_FAILURE"
-      - name: This shouldn't be skipped
+
+      - name: This should not be skipped
         if: success() || failure()
         run: |
           echo "EXAMPLE_SUCCESS is $EXAMPLE_SUCCESS"
