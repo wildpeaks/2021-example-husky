@@ -9,26 +9,21 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     env:
-      EXAMPLE_SUCCESS: "DEFAULT VALUE"
-      EXAMPLE_FAILURE: "DEFAULT VALUE"
-
+      ACTION_ERROR: "false"
     steps:
-      - name: This should pass
+      - name: Initialize
         run: |
-          echo ::set-env name=EXAMPLE_SUCCESS::MODIFIED
+          echo OK
 
-      - name: This should fail
+      - name: Build
         run: |
-          echo ::set-env name=EXAMPLE_FAILURE::MODIFIED
+          echo FAIL
           exit 1
 
-      - name: This should be skipped
-        run: |
-          echo "EXAMPLE_SUCCESS is $EXAMPLE_SUCCESS"
-          echo "EXAMPLE_FAILURE is $EXAMPLE_FAILURE"
+      - if: failure()
+        run: echo ::set-env name=ACTION_ERROR::true
 
-      - name: This should not be skipped
-        if: success() || failure()
+      - if: success() || failure()
         run: |
-          echo "EXAMPLE_SUCCESS is $EXAMPLE_SUCCESS"
-          echo "EXAMPLE_FAILURE is $EXAMPLE_FAILURE"
+          echo "ACTION_ERROR is $ACTION_ERROR"
+
