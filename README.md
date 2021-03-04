@@ -76,7 +76,7 @@ Lint the commit message using [commitlint](https://www.npmjs.com/package/commitl
 
 `.husky/commit-msg`:
 ````
-commitlint -E HUSKY_GIT_PARAMS
+npx commitlint -E HUSKY_GIT_PARAMS
 ````
 
 
@@ -103,5 +103,5 @@ and [pretty-quick](https://www.npmjs.com/package/pretty-quick).
 
 `.husky/pre-commit`:
 ````
-pretty-quick --staged
+npx pretty-quick --staged
 ````
