@@ -1,7 +1,7 @@
 # Example: Git Hooks
 
 Example showing how to use [Husky](https://www.npmjs.com/package/husky)
-to refuse commit that don't pass linters.
+to prevent commits that don't pass linters.
 
 Warning: **it's possible to skip hooks** (by not installing dependencies or with a CLI flag),
 so you shouldn't expect every commit to have been sanitized.
